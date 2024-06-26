@@ -1,0 +1,1 @@
+# Image-Elaboration-fo-Coefficient-Calculator
