@@ -6,3 +6,5 @@ modelsim/work/_lib.qdb
 *.qpg
 *.qtl
 modelsim/work/_vmake
+modelsim/vsim.wlf
+modelsim/Image-Elaboration-fo-Coefficient-Calculator.cr.mti
