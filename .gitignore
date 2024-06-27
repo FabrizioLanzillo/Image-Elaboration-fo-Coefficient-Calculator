@@ -1,0 +1,8 @@
+
+modelsim/work/_info
+modelsim/work/_lib.qdb
+*.mpf
+*.qdb
+*.qpg
+*.qtl
+modelsim/work/_vmake
