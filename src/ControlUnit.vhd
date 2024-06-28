@@ -40,37 +40,35 @@ begin
 
             -- check on the number of the row of the matrix, in order
             -- to update the value when we reach the end of the column
-            if i_current_value <= "11" then
+            if(to_integer(unsigned(i_current_value)) <= 3) then
                 -- check if we are reading the pixel on the first value
                 -- in this case we return as fo the zero value
-                if i_current_value < "001"  then
+                if(to_integer(unsigned(i_current_value)) = 0) then
                     -- we assign fo the default value of zero
                     fo_s <= (others => '0');
+                    i_s <= std_logic_vector(resize(unsigned(i_current_value) +1, 2));
+                    j_s <= j_current_value;
                 else
                     -- we compute fo using the given formula
-                    -- fo_s <= std_logic_vector(unsigned(alpha) * unsigned(previous_pixel) + (8 - unsigned(alpha)) * unsigned(pixel));
                     fo_s <= std_logic_vector(resize(unsigned(alpha) * unsigned(previous_pixel) + (8 - unsigned(alpha)) * unsigned(pixel), 12));
+                    if(to_integer(unsigned(i_current_value)) = 3) then
+                        i_s <= (others => '0');
+
+                        if(to_integer(unsigned(j_current_value)) < 3) then
+                            j_s <= std_logic_vector(resize(unsigned(j_current_value) +1, 2));                          
+                        else
+                            j_s <= (others => '0');
+                        end if;
+                    else
+                        i_s <= std_logic_vector(resize(unsigned(i_current_value) +1, 2));
+                        j_s <= j_current_value;
+                    end if;
                 end if;
-                -- increment of the row value to select the next pixel of the column
-                --i_s <= std_logic_vector(resize((unsigned(i_current_value) + 1), NbitRow));
-                i_s <= "10";
-                -- the column remein constant
-                j_s <= j_current_value;
+
             else
-                -- we check that there are still column to which extract the pixels
-                -- we arrive here if we have taken all the pixels of the previuous column
-                if j_current_value < "100"  then
-                    -- we increment the one of the column
-                    --j_s <= std_logic_vector(resize((unsigned(j_current_value) + 1), NbitCol));
-                    j_s <= "11";
-                else
-                    -- if we reached the end of the image we reset also j
-                    j_s <= (others => '0');
-                end if;
-                -- we restore the row value 
-                i_s <= (others => '0');
-                -- we assign fo the default value of zero
                 fo_s <= (others => '0');
+                i_s <= (others => '0');
+                j_s <= (others => '0');
             end if;
 
             i_next_value <= i_s;

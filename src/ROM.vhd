@@ -8,14 +8,16 @@ use ieee.numeric_std.all;
 
 entity ROM is
     generic (
-        Npixel : integer := 4
+        Npixel : natural := 4;
+        NbitRow : natural := 2;   -- Default value is 4, can be configured
+        NBitCol : natural := 2   -- Default value is 4, can be configured
     );
     port (
         ---------------- input ----------------------
         -- i is the counter of the row of the matrix
-        i : in std_logic_vector(ceil(log2(Npixel))-1 downto 0);
+        i : in std_logic_vector(NbitRow-1 downto 0);
         -- j is the counter of the row of the matrix
-        j : in std_logic_vector(ceil(log2(Npixel))-1 downto 0);
+        j : in std_logic_vector(NBitCol-1 downto 0);
 
         ---------------- output ---------------------
         pixel : out std_logic_vector(7 downto 0)
@@ -39,7 +41,7 @@ architecture dataflow of ROM is
     );
 begin
     -- Calculate the pixel address
-    pixel_addr_int <= to_integer(i)*Npixel + to_integer(j);
+    pixel_addr_int <= to_integer(unsigned(i)*Npixel + unsigned(j));
     -- Assign the pixel value from the ROM array
-    pixel <= rom(pixel_addr_int);
+    pixel <= std_logic_vector(resize(rom(pixel_addr_int) +1, Npixel));
 end architecture;
