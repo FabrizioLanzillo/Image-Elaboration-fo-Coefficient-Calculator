@@ -12,7 +12,7 @@ entity FoCalculator is
         NBitAlpha : natural := 3;  -- Default value is 3, can be configured
         NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
         NRow : natural := 4;
-        NbitRow : natural := 2;  
+        NBitRow : natural := 2;  
         NBitCol : natural := 2;   
         NCol : natural := 4;
         NBitFo : natural := 12  -- Default value is 4, can be configured
@@ -23,7 +23,7 @@ entity FoCalculator is
     	pixel       : in std_logic_vector(7 downto 0);
         alpha       : in std_logic_vector(NBitAlpha-1 downto 0);
 
-        i_next_value : out std_logic_vector(NbitRow-1 downto 0);
+        i_next_value : out std_logic_vector(NBitRow-1 downto 0);
         j_next_value : out std_logic_vector(NBitCol-1 downto 0);
         -- The # of bits of the output is evaluated from the given formula
         -- where we have the multiplication of the 3 bits of alpha 
@@ -43,11 +43,11 @@ architecture rtl of FoCalculator is
     signal alpha_in_ext : std_logic_vector(NBitAlpha-1 downto 0);
     signal pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
     signal previous_pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
-    signal i_current_value_in_ext : std_logic_vector(NbitRow-1 downto 0);
+    signal i_current_value_in_ext : std_logic_vector(NBitRow-1 downto 0);
     signal j_current_value_in_ext : std_logic_vector(NBitCol-1 downto 0);
     
     ---------------- output ---------------------
-    signal i_next_value_out_ext : std_logic_vector(NbitRow-1 downto 0);
+    signal i_next_value_out_ext : std_logic_vector(NBitRow-1 downto 0);
     signal j_next_value_out_ext : std_logic_vector(NBitCol-1 downto 0);
     signal fo_out_ext : std_logic_vector(11 downto 0);
 
@@ -71,7 +71,7 @@ architecture rtl of FoCalculator is
             NBitAlpha : natural := 3;  
             NBitPixelValue : natural := 8;  
             NRow : natural := 4;
-            NbitRow : natural := 2;  
+            NBitRow : natural := 2;  
             NBitCol : natural := 2;   
             NCol : natural := 4;
             NbitFo : natural := 12
@@ -81,11 +81,11 @@ architecture rtl of FoCalculator is
             alpha : in std_logic_vector(NBitAlpha-1 downto 0);
             pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
             previous_pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
-            i_current_value : in std_logic_vector(NbitRow-1 downto 0);
+            i_current_value : in std_logic_vector(NBitRow-1 downto 0);
             j_current_value : in std_logic_vector(NBitCol-1 downto 0);
             
             ---------------- output ---------------------
-            i_next_value : out std_logic_vector(NbitRow-1 downto 0);
+            i_next_value : out std_logic_vector(NBitRow-1 downto 0);
             j_next_value : out std_logic_vector(NBitCol-1 downto 0);
             fo : out std_logic_vector(NbitFo-1 downto 0)  
         );
@@ -117,7 +117,7 @@ begin
 
     -- row
     REG_ROW: DFF_N
-        generic map (NBit => NbitRow)
+        generic map (NBit => NBitRow)
         port map(
             clk     => clk,   
             a_rst_n => a_rst_n,
@@ -164,7 +164,7 @@ begin
             NBitAlpha => NBitAlpha,
             NBitPixelValue => NBitPixelValue,
             NRow => NRow,
-            NbitRow => NbitRow,  
+            NBitRow => NBitRow,  
             NBitCol => NBitCol,   
             NCol => NCol,
             NbitFo => NbitFo

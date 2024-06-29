@@ -13,7 +13,7 @@ architecture rtl of ControlUnit_tb is
     constant NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
     -- the matrix is 4 pixel x 4 pixel
     constant NRow : natural := 4;
-    constant NbitRow : natural := 2;   -- Default value is 4, can be configured
+    constant NBitRow : natural := 2;   -- Default value is 4, can be configured
     constant NBitCol : natural := 2;   -- Default value is 4, can be configured
     constant NCol : natural := 4;
     constant NbitFo : natural := 12;
@@ -24,7 +24,7 @@ architecture rtl of ControlUnit_tb is
             NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
             -- the matrix is 4 pixel x 4 pixel
             NRow : natural := 4;
-            NbitRow : natural := 2;   -- Default value is 4, can be configured
+            NBitRow : natural := 2;   -- Default value is 4, can be configured
             NBitCol : natural := 2;   -- Default value is 4, can be configured
             NCol : natural := 4;
             NbitFo : natural := 12  
@@ -34,11 +34,11 @@ architecture rtl of ControlUnit_tb is
             alpha : in std_logic_vector(NBitAlpha-1 downto 0);
             pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
             previous_pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
-            i_current_value : in std_logic_vector(NbitRow-1 downto 0);
+            i_current_value : in std_logic_vector(NBitRow-1 downto 0);
             j_current_value : in std_logic_vector(NBitCol-1 downto 0);
             
             ---------------- output ---------------------
-            i_next_value : out std_logic_vector(NbitRow-1 downto 0);
+            i_next_value : out std_logic_vector(NBitRow-1 downto 0);
             j_next_value : out std_logic_vector(NBitCol-1 downto 0);
             fo : out std_logic_vector(NbitFo-1 downto 0)  
         );
@@ -48,11 +48,11 @@ architecture rtl of ControlUnit_tb is
     signal alpha_in_ext : std_logic_vector(NBitAlpha-1 downto 0) := "010";
     signal pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
     signal previous_pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
-    signal i_current_value_in_ext : std_logic_vector(NbitRow-1 downto 0);
+    signal i_current_value_in_ext : std_logic_vector(NBitRow-1 downto 0);
     signal j_current_value_in_ext : std_logic_vector(NBitCol-1 downto 0);
     
     ---------------- output ---------------------
-    signal i_next_value_out_ext : std_logic_vector(NbitRow-1 downto 0);
+    signal i_next_value_out_ext : std_logic_vector(NBitRow-1 downto 0);
     signal j_next_value_out_ext : std_logic_vector(NBitCol-1 downto 0);
     signal fo_out_ext : std_logic_vector(NbitFo-1 downto 0);
 
@@ -66,7 +66,7 @@ architecture rtl of ControlUnit_tb is
             NBitAlpha => NBitAlpha,
             NBitPixelValue => NBitPixelValue,
             NRow => NRow,
-            NbitRow => NbitRow,  
+            NBitRow => NBitRow,  
             NBitCol => NBitCol,   
             NCol => NCol,
             NbitFo => NbitFo

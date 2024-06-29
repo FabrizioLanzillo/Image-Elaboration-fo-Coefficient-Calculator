@@ -11,7 +11,7 @@ architecture rtl of ROM_tb is
     constant clk_period     : time := 100 ns;
     constant Npixel : natural := 4;
     constant NBitPixelValue: natural := 8;
-    constant NbitRow : natural := 2;   -- Default value is 4, can be configured
+    constant NBitRow : natural := 2;   -- Default value is 4, can be configured
     constant NBitCol : natural := 2;   -- Default value is 4, can be configured
 
 
@@ -19,13 +19,13 @@ architecture rtl of ROM_tb is
         generic (
             Npixel : natural := 4;
             NBitPixelValue: natural := 8;
-            NbitRow : natural := 2;   -- Default value is 4, can be configured
+            NBitRow : natural := 2;   -- Default value is 4, can be configured
             NBitCol : natural := 2   -- Default value is 4, can be configured
         );
         port (
             ---------------- input ----------------------
             -- i is the counter of the row of the matrix
-            i : in std_logic_vector(NbitRow-1 downto 0);
+            i : in std_logic_vector(NBitRow-1 downto 0);
             -- j is the counter of the row of the matrix
             j : in std_logic_vector(NBitCol-1 downto 0);
 
@@ -35,7 +35,7 @@ architecture rtl of ROM_tb is
     end component;
 
     signal clk : std_logic := '0';
-    signal i_in_ext : std_logic_vector(NbitRow-1 downto 0);
+    signal i_in_ext : std_logic_vector(NBitRow-1 downto 0);
     signal j_in_ext : std_logic_vector(NBitCol-1 downto 0);
     
     ---------------- output ---------------------
@@ -50,7 +50,7 @@ architecture rtl of ROM_tb is
         generic map (
             Npixel => Npixel,
             NBitPixelValue => NBitPixelValue,
-            NbitRow => NbitRow,
+            NBitRow => NBitRow,
             NBitCol => NBitCol
         )
         port map(

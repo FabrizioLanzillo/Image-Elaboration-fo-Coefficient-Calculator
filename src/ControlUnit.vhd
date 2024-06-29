@@ -8,7 +8,7 @@ entity ControlUnit is
         NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
         -- the matrix is 4 pixel x 4 pixel
         NRow : natural := 4;
-        NbitRow : natural := 2;   -- Default value is 4, can be configured
+        NBitRow : natural := 2;   -- Default value is 4, can be configured
         NBitCol : natural := 2;   -- Default value is 4, can be configured
         NCol : natural := 4;
         NbitFo : natural := 12
@@ -18,11 +18,11 @@ entity ControlUnit is
         alpha : in std_logic_vector(NBitAlpha-1 downto 0);
         pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
         previous_pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
-        i_current_value : in std_logic_vector(NbitRow-1 downto 0);
+        i_current_value : in std_logic_vector(NBitRow-1 downto 0);
         j_current_value : in std_logic_vector(NBitCol-1 downto 0);
         
         ---------------- output ---------------------
-        i_next_value : out std_logic_vector(NbitRow-1 downto 0);
+        i_next_value : out std_logic_vector(NBitRow-1 downto 0);
         j_next_value : out std_logic_vector(NBitCol-1 downto 0);
         -- The # of bits of the output is evaluated from the given formula
         -- where we have the multiplication of the 3 bits of alpha 
@@ -33,7 +33,7 @@ entity ControlUnit is
 end entity ControlUnit;
 
 architecture behavioral of ControlUnit is
-    signal i_s : std_logic_vector(NbitRow-1 downto 0);
+    signal i_s : std_logic_vector(NBitRow-1 downto 0);
     signal j_s : std_logic_vector(NBitCol-1 downto 0);
     signal fo_s : std_logic_vector(NbitFo-1 downto 0);
 
@@ -49,7 +49,7 @@ begin
                 if(to_integer(unsigned(i_current_value)) = 0) then
                     -- we assign fo the default value of zero
                     fo_s <= (others => '0');
-                    i_s <= std_logic_vector(resize(unsigned(i_current_value) +1, NbitRow));
+                    i_s <= std_logic_vector(resize(unsigned(i_current_value) +1, NBitRow));
                     j_s <= j_current_value;
                 else
                     -- we compute fo using the given formula
@@ -63,7 +63,7 @@ begin
                             j_s <= (others => '0');
                         end if;
                     else
-                        i_s <= std_logic_vector(resize(unsigned(i_current_value) +1, NbitRow));
+                        i_s <= std_logic_vector(resize(unsigned(i_current_value) +1, NBitRow));
                         j_s <= j_current_value;
                     end if;
                 end if;
