@@ -1,0 +1,296 @@
+
+*** Running vivado
+    with args -log ImageElaborationSystem.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source ImageElaborationSystem.tcl
+
+
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source ImageElaborationSystem.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 377.758 ; gain = 63.887
+Command: read_checkpoint -auto_incremental -incremental {D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/vivado/Image_Elaboration_fo_Coefficient_Calculator.srcs/utils_1/imports/synth_IE_FO_CC/ImageElaborationSystem.dcp}
+INFO: [Vivado 12-5825] Read reference checkpoint from D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/vivado/Image_Elaboration_fo_Coefficient_Calculator.srcs/utils_1/imports/synth_IE_FO_CC/ImageElaborationSystem.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top ImageElaborationSystem -part xc7z010clg400-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 32356
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [C:/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1191.832 ; gain = 409.395
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'ImageElaborationSystem' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ImageElaborationSystem.vhd:27]
+	Parameter NBitAlpha bound to: 3 - type: integer 
+	Parameter NBitPixelValue bound to: 8 - type: integer 
+	Parameter NRow bound to: 4 - type: integer 
+	Parameter NBitRow bound to: 2 - type: integer 
+	Parameter NBitCol bound to: 2 - type: integer 
+	Parameter NCol bound to: 4 - type: integer 
+	Parameter NBitFo bound to: 12 - type: integer 
+INFO: [Synth 8-3491] module 'FoCalculator' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:10' bound to instance 'FO_CALCULATOR' of component 'FoCalculator' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ImageElaborationSystem.vhd:76]
+INFO: [Synth 8-638] synthesizing module 'FoCalculator' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:40]
+	Parameter NBitAlpha bound to: 3 - type: integer 
+	Parameter NBitPixelValue bound to: 8 - type: integer 
+	Parameter NRow bound to: 4 - type: integer 
+	Parameter NBitRow bound to: 2 - type: integer 
+	Parameter NBitCol bound to: 2 - type: integer 
+	Parameter NCol bound to: 4 - type: integer 
+	Parameter NBitFo bound to: 12 - type: integer 
+	Parameter NBit bound to: 8 - type: integer 
+INFO: [Synth 8-3491] module 'DFF_N' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:10' bound to instance 'REG_NEW_PIXEL' of component 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:97]
+INFO: [Synth 8-638] synthesizing module 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 8 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'DFF_N' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 8 - type: integer 
+INFO: [Synth 8-3491] module 'DFF_N' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:10' bound to instance 'REG_OLD_PIXEL' of component 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:108]
+	Parameter NBit bound to: 2 - type: integer 
+INFO: [Synth 8-3491] module 'DFF_N' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:10' bound to instance 'REG_ROW' of component 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:119]
+INFO: [Synth 8-638] synthesizing module 'DFF_N__parameterized2' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'DFF_N__parameterized2' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 2 - type: integer 
+INFO: [Synth 8-3491] module 'DFF_N' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:10' bound to instance 'REG_COL' of component 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:130]
+	Parameter NBit bound to: 3 - type: integer 
+INFO: [Synth 8-3491] module 'DFF_N' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:10' bound to instance 'REG_ALPHA' of component 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:141]
+INFO: [Synth 8-638] synthesizing module 'DFF_N__parameterized4' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 3 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'DFF_N__parameterized4' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 12 - type: integer 
+INFO: [Synth 8-3491] module 'DFF_N' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:10' bound to instance 'REG_FO' of component 'DFF_N' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:152]
+INFO: [Synth 8-638] synthesizing module 'DFF_N__parameterized6' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBit bound to: 12 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'DFF_N__parameterized6' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/DFF_N.vhd:28]
+	Parameter NBitAlpha bound to: 3 - type: integer 
+	Parameter NBitPixelValue bound to: 8 - type: integer 
+	Parameter NRow bound to: 4 - type: integer 
+	Parameter NBitRow bound to: 2 - type: integer 
+	Parameter NBitCol bound to: 2 - type: integer 
+	Parameter NCol bound to: 4 - type: integer 
+	Parameter NbitFo bound to: 12 - type: integer 
+INFO: [Synth 8-3491] module 'ControlUnit' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ControlUnit.vhd:5' bound to instance 'CONTROL_UNIT' of component 'ControlUnit' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'ControlUnit' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ControlUnit.vhd:35]
+	Parameter NBitAlpha bound to: 3 - type: integer 
+	Parameter NBitPixelValue bound to: 8 - type: integer 
+	Parameter NRow bound to: 4 - type: integer 
+	Parameter NBitRow bound to: 2 - type: integer 
+	Parameter NBitCol bound to: 2 - type: integer 
+	Parameter NCol bound to: 4 - type: integer 
+	Parameter NbitFo bound to: 12 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'ControlUnit' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ControlUnit.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'FoCalculator' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/FoCalculator.vhd:40]
+	Parameter Npixel bound to: 4 - type: integer 
+	Parameter NBitPixelValue bound to: 8 - type: integer 
+	Parameter NBitRow bound to: 2 - type: integer 
+	Parameter NBitCol bound to: 2 - type: integer 
+INFO: [Synth 8-3491] module 'ROM' declared at 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ROM.vhd:9' bound to instance 'C_ROM' of component 'ROM' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ImageElaborationSystem.vhd:97]
+INFO: [Synth 8-638] synthesizing module 'ROM' [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ROM.vhd:32]
+	Parameter Npixel bound to: 4 - type: integer 
+	Parameter NBitPixelValue bound to: 8 - type: integer 
+	Parameter NBitRow bound to: 2 - type: integer 
+	Parameter NBitCol bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'ROM' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ROM.vhd:32]
+INFO: [Synth 8-256] done synthesizing module 'ImageElaborationSystem' (0#1) [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/src/ImageElaborationSystem.vhd:27]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1282.387 ; gain = 499.949
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1282.387 ; gain = 499.949
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1282.387 ; gain = 499.949
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1282.387 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/vivado/Image_Elaboration_fo_Coefficient_Calculator.srcs/constrs_IE_FO_CC/new/ImageElaborationSystem.xdc]
+Finished Parsing XDC File [D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/vivado/Image_Elaboration_fo_Coefficient_Calculator.srcs/constrs_IE_FO_CC/new/ImageElaborationSystem.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1327.641 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 1332.195 ; gain = 4.555
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [C:/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    2 Bit       Adders := 2     
++---Registers : 
+	               12 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 2     
++---Muxes : 
+	   2 Input   11 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |     9|
+|2     |LUT1   |     2|
+|3     |LUT2   |    19|
+|4     |LUT3   |    13|
+|5     |LUT4   |    12|
+|6     |LUT5   |     4|
+|7     |LUT6   |    27|
+|8     |FDCE   |    26|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:39 . Memory (MB): peak = 1332.195 ; gain = 499.949
+Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1332.195 ; gain = 549.758
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1332.195 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 9 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1336.723 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 9ac4c79b
+INFO: [Common 17-83] Releasing license: Synthesis
+47 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:50 . Memory (MB): peak = 1336.723 ; gain = 934.129
+INFO: [Common 17-1381] The checkpoint 'D:/Dati/GitHub/Personal Repositories/Image-Elaboration-fo-Coefficient-Calculator/vivado/Image_Elaboration_fo_Coefficient_Calculator.runs/synth_IE_FO_CC/ImageElaborationSystem.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file ImageElaborationSystem_utilization_synth.rpt -pb ImageElaborationSystem_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Jun 29 23:59:08 2024...

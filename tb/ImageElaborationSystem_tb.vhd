@@ -3,50 +3,46 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 use IEEE.numeric_std.all;
 
-entity FoCalculator_tb is
-    end FoCalculator_tb;
+entity ImageElaborationSystem_tb is
+    end ImageElaborationSystem_tb;
 
-architecture rtl of FoCalculator_tb is
+architecture rtl of ImageElaborationSystem_tb is
 
     constant clk_period     : time := 100 ns;
     constant NBitAlpha : natural := 3;  -- Default value is 3, can be configured
+    constant NBitFo : natural := 12;  -- Default value is 4, can be configured
     constant NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
     constant NRow : natural := 4;
     constant NBitRow : natural := 2;  
     constant NBitCol : natural := 2;   
     constant NCol : natural := 4;
-    constant NBitFo : natural := 12;
+    constant Npixel : natural := 4;
 
-    component FoCalculator
+    component ImageElaborationSystem
         generic (
             NBitAlpha : natural := 3;  -- Default value is 3, can be configured
+            NBitFo : natural := 12;  -- Default value is 4, can be configured
             NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
             NRow : natural := 4;
             NBitRow : natural := 2;  
             NBitCol : natural := 2;   
             NCol : natural := 4;
-            NBitFo : natural := 12  -- Default value is 4, can be configured
+            Npixel : natural := 4
         );
         port (
             clk         : in  std_logic;
             a_rst_n     : in  std_logic;
-            pixel       : in std_logic_vector(7 downto 0);
             alpha       : in std_logic_vector(NBitAlpha-1 downto 0);
 
-            i_next_value : out std_logic_vector(NBitRow-1 downto 0);
-            j_next_value : out std_logic_vector(NBitCol-1 downto 0);
             fo : out std_logic_vector(NBitFo-1 downto 0)  
         );
     end component;
 
     signal clk : std_logic := '0';
     signal a_rst_n_ext : std_logic := '0';
-    signal pixel_in_ext : std_logic_vector(7 downto 0);
     signal alpha_in_ext : std_logic_vector(NBitAlpha-1 downto 0) := "010";
     
     ---------------- output ---------------------
-    signal i_next_value_out_ext : std_logic_vector(NBitRow-1 downto 0);
-    signal j_next_value_out_ext : std_logic_vector(NBitCol-1 downto 0);
     signal fo_out_ext : std_logic_vector(NBitFo-1 downto 0);
 
     signal testing : boolean := true;
@@ -54,47 +50,29 @@ architecture rtl of FoCalculator_tb is
     begin
         clk <= not clk after clk_period/2 when testing else '0';
 
-        dut: FoCalculator
+        dut: ImageElaborationSystem
         generic map (
             NBitAlpha => NBitAlpha,
+            NBitFo => NBitFo,
             NBitPixelValue => NBitPixelValue,
             NRow => NRow,
             NBitRow => NBitRow,
             NBitCol => NBitCol,
             NCol => NCol,
-            NBitFo => NBitFo
+            Npixel => Npixel
         )
         port map(
             clk => clk,
             a_rst_n => a_rst_n_ext,
-            pixel => pixel_in_ext,
             alpha => alpha_in_ext,
 
-            i_next_value => i_next_value_out_ext,
-            j_next_value => j_next_value_out_ext,
             fo => fo_out_ext
         );
 
         stimulus : process 
 			begin    
-			a_rst_n_ext <= '1';        
-            pixel_in_ext <= x"FF";
-			wait until rising_edge(clk);
-            pixel_in_ext <= x"AA";
-			wait until rising_edge(clk);
-            pixel_in_ext <= x"55";
-			wait until rising_edge(clk);
-            pixel_in_ext <= x"33";
-            wait until rising_edge(clk);
-            pixel_in_ext <= x"11";
-			wait until rising_edge(clk);
-            pixel_in_ext <= x"22";
-            wait until rising_edge(clk);
-            pixel_in_ext <= x"33";
-            wait until rising_edge(clk);
-            pixel_in_ext <= x"44";
-			wait until rising_edge(clk);
-            pixel_in_ext <= x"EE";
+			a_rst_n_ext <= '1';     
+			wait for 800 ns;
 			wait until rising_edge(clk);
 			testing  <= false;
 		end process;

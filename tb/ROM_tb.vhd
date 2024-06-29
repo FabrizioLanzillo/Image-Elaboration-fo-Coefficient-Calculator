@@ -80,6 +80,12 @@ architecture rtl of ROM_tb is
             i_in_ext <= "01";
             j_in_ext <= "01";
             wait until rising_edge(clk);
+            i_in_ext <= "10";
+            j_in_ext <= "01";
+            wait until rising_edge(clk);
+            i_in_ext <= "11";
+            j_in_ext <= "01";
+            wait until rising_edge(clk);
             i_in_ext <= "11";
             j_in_ext <= "11";
 			wait until rising_edge(clk);
