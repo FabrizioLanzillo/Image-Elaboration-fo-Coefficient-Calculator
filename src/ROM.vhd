@@ -9,6 +9,7 @@ use ieee.numeric_std.all;
 entity ROM is
     generic (
         Npixel : natural := 4;
+        NBitPixelValue: natural := 8;
         NbitRow : natural := 2;   -- Default value is 4, can be configured
         NBitCol : natural := 2   -- Default value is 4, can be configured
     );
@@ -20,7 +21,7 @@ entity ROM is
         j : in std_logic_vector(NBitCol-1 downto 0);
 
         ---------------- output ---------------------
-        pixel : out std_logic_vector(7 downto 0)
+        pixel : out std_logic_vector(NBitPixelValue-1 downto 0)
     );
 end entity ROM;
 
@@ -31,7 +32,7 @@ end entity ROM;
 architecture dataflow of ROM is
     signal pixel_addr_int : integer range 0 to Npixel*Npixel-1;
     -- Type definition for the ROM array
-    type rom_array_t is array (0 to Npixel*Npixel-1) of unsigned(7 downto 0);
+    type rom_array_t is array (0 to Npixel*Npixel-1) of unsigned(NBitPixelValue-1 downto 0);
     -- Constant ROM array with predefined values
     constant rom : rom_array_t := (
         x"FF", x"AA", x"55", x"33",  -- first 4 values
@@ -40,8 +41,11 @@ architecture dataflow of ROM is
         x"BB", x"CC", x"DD", x"EE"   -- last 4 values
     );
 begin
+
     -- Calculate the pixel address
-    pixel_addr_int <= to_integer(unsigned(i)*Npixel + unsigned(j));
+    --pixel_addr_int <= to_integer(unsigned(i)*Npixel + unsigned(j));
+    pixel_addr_int <= to_integer(unsigned(j)*to_unsigned(Npixel,3) + unsigned(i));
     -- Assign the pixel value from the ROM array
-    pixel <= std_logic_vector(resize(rom(pixel_addr_int) +1, Npixel));
+    pixel <= std_logic_vector(rom(pixel_addr_int));
+
 end architecture;

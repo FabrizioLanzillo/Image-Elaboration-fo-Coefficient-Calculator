@@ -10,9 +10,11 @@ use IEEE.NUMERIC_STD.all;
 entity FoCalculator is
     generic (
         NBitAlpha : natural := 3;  -- Default value is 3, can be configured
-        NBitPixel : natural := 8;   -- Default value is 8, can be configured
-        NbitRow : natural := 2;   -- Default value is 4, can be configured
-        NBitCol : natural := 2;   -- Default value is 4, can be configured
+        NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
+        NRow : natural := 4;
+        NbitRow : natural := 2;  
+        NBitCol : natural := 2;   
+        NCol : natural := 4;
         NBitFo : natural := 12  -- Default value is 4, can be configured
     );
     port (
@@ -39,8 +41,8 @@ architecture rtl of FoCalculator is
     -- signals 
     -- control unit
     signal alpha_in_ext : std_logic_vector(NBitAlpha-1 downto 0);
-    signal pixel_in_ext : std_logic_vector(NBitPixel-1 downto 0);
-    signal previous_pixel_in_ext : std_logic_vector(NBitPixel-1 downto 0);
+    signal pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
+    signal previous_pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
     signal i_current_value_in_ext : std_logic_vector(NbitRow-1 downto 0);
     signal j_current_value_in_ext : std_logic_vector(NBitCol-1 downto 0);
     
@@ -67,22 +69,25 @@ architecture rtl of FoCalculator is
     component ControlUnit
         generic (
             NBitAlpha : natural := 3;  
-            NBitPixel : natural := 8;  
-            NbitRow : natural := 2;   
-            NBitCol : natural := 2  
+            NBitPixelValue : natural := 8;  
+            NRow : natural := 4;
+            NbitRow : natural := 2;  
+            NBitCol : natural := 2;   
+            NCol : natural := 4;
+            NbitFo : natural := 12
         );
         port (
             ---------------- input ----------------------
             alpha : in std_logic_vector(NBitAlpha-1 downto 0);
-            pixel : in std_logic_vector(NBitPixel-1 downto 0);
-            previous_pixel : in std_logic_vector(NBitPixel-1 downto 0);
+            pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
+            previous_pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
             i_current_value : in std_logic_vector(NbitRow-1 downto 0);
             j_current_value : in std_logic_vector(NBitCol-1 downto 0);
             
             ---------------- output ---------------------
             i_next_value : out std_logic_vector(NbitRow-1 downto 0);
             j_next_value : out std_logic_vector(NBitCol-1 downto 0);
-            fo : out std_logic_vector(11 downto 0)  
+            fo : out std_logic_vector(NbitFo-1 downto 0)  
         );
     end component;
 
@@ -90,7 +95,7 @@ begin
 
     -- new pixel
     REG_NEW_PIXEL: DFF_N
-        generic map (NBit => NBitPixel)
+        generic map (NBit => NBitPixelValue)
         port map(
             clk     => clk,   
             a_rst_n => a_rst_n,
@@ -101,7 +106,7 @@ begin
 
     -- old pixel
     REG_OLD_PIXEL: DFF_N
-        generic map (NBit => NBitPixel)
+        generic map (NBit => NBitPixelValue)
         port map(
             clk     => clk,   
             a_rst_n => a_rst_n,
@@ -157,9 +162,12 @@ begin
     CONTROL_UNIT: ControlUnit
         generic map (
             NBitAlpha => NBitAlpha,
-            NBitPixel => NBitPixel,
-            NbitRow => NbitRow,
-            NBitCol => NBitCol
+            NBitPixelValue => NBitPixelValue,
+            NRow => NRow,
+            NbitRow => NbitRow,  
+            NBitCol => NBitCol,   
+            NCol => NCol,
+            NbitFo => NbitFo
         )
         port map(
             alpha => alpha_in_ext,

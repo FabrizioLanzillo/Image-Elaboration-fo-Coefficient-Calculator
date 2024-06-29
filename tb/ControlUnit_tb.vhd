@@ -10,44 +10,51 @@ architecture rtl of ControlUnit_tb is
 
     constant clk_period     : time := 100 ns;
     constant NBitAlpha : natural := 3;  -- Default value is 3, can be configured
-    constant NBitPixel : natural := 8;   -- Default value is 8, can be configured
+    constant NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
     -- the matrix is 4 pixel x 4 pixel
+    constant NRow : natural := 4;
     constant NbitRow : natural := 2;   -- Default value is 4, can be configured
     constant NBitCol : natural := 2;   -- Default value is 4, can be configured
+    constant NCol : natural := 4;
+    constant NbitFo : natural := 12;
 
     component ControlUnit
         generic (
-            NBitAlpha : natural := 3;  
-            NBitPixel : natural := 8;  
-            NbitRow : natural := 2;   
-            NBitCol : natural := 2  
+            NBitAlpha : natural := 3;  -- Default value is 3, can be configured
+            NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
+            -- the matrix is 4 pixel x 4 pixel
+            NRow : natural := 4;
+            NbitRow : natural := 2;   -- Default value is 4, can be configured
+            NBitCol : natural := 2;   -- Default value is 4, can be configured
+            NCol : natural := 4;
+            NbitFo : natural := 12  
         );
         port (
             ---------------- input ----------------------
             alpha : in std_logic_vector(NBitAlpha-1 downto 0);
-            pixel : in std_logic_vector(NBitPixel-1 downto 0);
-            previous_pixel : in std_logic_vector(NBitPixel-1 downto 0);
+            pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
+            previous_pixel : in std_logic_vector(NBitPixelValue-1 downto 0);
             i_current_value : in std_logic_vector(NbitRow-1 downto 0);
             j_current_value : in std_logic_vector(NBitCol-1 downto 0);
             
             ---------------- output ---------------------
             i_next_value : out std_logic_vector(NbitRow-1 downto 0);
             j_next_value : out std_logic_vector(NBitCol-1 downto 0);
-            fo : out std_logic_vector(11 downto 0)  
+            fo : out std_logic_vector(NbitFo-1 downto 0)  
         );
     end component;
 
     signal clk : std_logic := '0';
     signal alpha_in_ext : std_logic_vector(NBitAlpha-1 downto 0) := "010";
-    signal pixel_in_ext : std_logic_vector(NBitPixel-1 downto 0);
-    signal previous_pixel_in_ext : std_logic_vector(NBitPixel-1 downto 0);
+    signal pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
+    signal previous_pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);
     signal i_current_value_in_ext : std_logic_vector(NbitRow-1 downto 0);
     signal j_current_value_in_ext : std_logic_vector(NBitCol-1 downto 0);
     
     ---------------- output ---------------------
     signal i_next_value_out_ext : std_logic_vector(NbitRow-1 downto 0);
     signal j_next_value_out_ext : std_logic_vector(NBitCol-1 downto 0);
-    signal fo_out_ext : std_logic_vector(11 downto 0);
+    signal fo_out_ext : std_logic_vector(NbitFo-1 downto 0);
 
     signal testing : boolean := true;
 
@@ -57,9 +64,12 @@ architecture rtl of ControlUnit_tb is
         dut: ControlUnit
         generic map (
             NBitAlpha => NBitAlpha,
-            NBitPixel => NBitPixel,
-            NbitRow => NbitRow,
-            NBitCol => NBitCol
+            NBitPixelValue => NBitPixelValue,
+            NRow => NRow,
+            NbitRow => NbitRow,  
+            NBitCol => NBitCol,   
+            NCol => NCol,
+            NbitFo => NbitFo
         )
         port map(
             alpha => alpha_in_ext,
