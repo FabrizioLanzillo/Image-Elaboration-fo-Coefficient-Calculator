@@ -10,8 +10,8 @@ entity ROM is
     generic (
         Npixel : natural := 4;
         NBitPixelValue: natural := 8;
-        NBitRow : natural := 2;   -- Default value is 4, can be configured
-        NBitCol : natural := 2   -- Default value is 4, can be configured
+        NBitRow : natural := 2; 
+        NBitCol : natural := 2   
     );
     port (
         ---------------- input ----------------------
@@ -33,19 +33,20 @@ architecture dataflow of ROM is
     signal pixel_addr_int : integer range 0 to Npixel*Npixel-1;
     -- Type definition for the ROM array
     type rom_array_t is array (0 to Npixel*Npixel-1) of unsigned(NBitPixelValue-1 downto 0);
-    -- Constant ROM array with predefined values
+    -- Constant ROM array with predefined values, these are the pixel value
+    -- who have been generated randomly
     constant rom : rom_array_t := (
-        x"FF", x"AA", x"55", x"33",  -- first 4 values
-        x"11", x"22", x"33", x"44",  -- next 4 values
-        x"66", x"77", x"88", x"99",  -- next 4 values
-        x"BB", x"CC", x"DD", x"EE"   -- last 4 values
+        x"FF", x"AA", x"55", x"33",  -- first column 4 values 
+        x"11", x"22", x"33", x"44",  -- next column 4 values
+        x"66", x"77", x"88", x"99",  -- next column 4 values
+        x"BB", x"CC", x"DD", x"EE"   -- last column 4 values
     );
 begin
 
-    -- Calculate the pixel address
-    --pixel_addr_int <= to_integer(unsigned(i)*Npixel + unsigned(j));
+    -- we use the row index and the column index to access the relative address of the pixel value
     pixel_addr_int <= to_integer(unsigned(j)*to_unsigned(Npixel,3) + unsigned(i));
-    -- Assign the pixel value from the ROM array
+    -- we use the address to index the pixel value in the ROM array
+    -- we assign it to the output port
     pixel <= std_logic_vector(rom(pixel_addr_int));
 
 end architecture;

@@ -3,31 +3,38 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 use IEEE.numeric_std.all;
 
+---------------------------------------------------------
+-- Entity
+---------------------------------------------------------
 entity ControlUnit_tb is
     end ControlUnit_tb;
 
+---------------------------------------------------------
+-- Architecture
+---------------------------------------------------------
 architecture rtl of ControlUnit_tb is
 
-    constant clk_period     : time := 100 ns;
-    constant NBitAlpha : natural := 3;  -- Default value is 3, can be configured
-    constant NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
-    -- the matrix is 4 pixel x 4 pixel
-    constant NRow : natural := 4;
-    constant NBitRow : natural := 2;   -- Default value is 4, can be configured
-    constant NBitCol : natural := 2;   -- Default value is 4, can be configured
-    constant NCol : natural := 4;
-    constant NbitFo : natural := 12;
+    constant clk_period:    time := 100 ns;
+    constant NBitAlpha :    natural := 3;  
+    constant NBitPixelValue: natural := 8;   
+    constant NRow :         natural := 4;
+    constant NBitRow :      natural := 2;   
+    constant NBitCol :      natural := 2;   
+    constant NCol :         natural := 4;
+    constant NbitFo :       natural := 12;
 
+    ---------------------------------------------------------
+    -- ControlUnit Component
+    ---------------------------------------------------------
     component ControlUnit
         generic (
-            NBitAlpha : natural := 3;  -- Default value is 3, can be configured
-            NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
-            -- the matrix is 4 pixel x 4 pixel
-            NRow : natural := 4;
-            NBitRow : natural := 2;   -- Default value is 4, can be configured
-            NBitCol : natural := 2;   -- Default value is 4, can be configured
-            NCol : natural := 4;
-            NbitFo : natural := 12  
+            NBitAlpha :     natural := 3;  
+            NBitPixelValue: natural := 8;  
+            NRow :          natural := 4;
+            NBitRow :       natural := 2;  
+            NBitCol :       natural := 2; 
+            NCol :          natural := 4;
+            NbitFo :        natural := 12  
         );
         port (
             ---------------- input ----------------------
@@ -44,6 +51,10 @@ architecture rtl of ControlUnit_tb is
         );
     end component;
 
+    ---------------------------------------------------------
+    -- Signals
+    ---------------------------------------------------------
+    ---------------- input ----------------------  
     signal clk : std_logic := '0';
     signal alpha_in_ext : std_logic_vector(NBitAlpha-1 downto 0) := "010";
     signal pixel_in_ext : std_logic_vector(NBitPixelValue-1 downto 0);

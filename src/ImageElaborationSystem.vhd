@@ -3,57 +3,73 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 use IEEE.numeric_std.all;
 
+---------------------------------------------------------
+-- Entity
+---------------------------------------------------------
 entity ImageElaborationSystem is
     generic (
-        NBitAlpha : natural := 3;  -- Default value is 3, can be configured
-        NBitFo : natural := 12;  -- Default value is 4, can be configured
-        NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
-        NRow : natural := 4;
-        NBitRow : natural := 2;  
-        NBitCol : natural := 2;   
-        NCol : natural := 4;
-        Npixel : natural := 4
+        NBitAlpha :     natural := 3;  
+        NBitFo :        natural := 12;  
+        NBitPixelValue: natural := 8;   
+        NRow :          natural := 4;
+        NBitRow :       natural := 2;  
+        NBitCol :       natural := 2;   
+        NCol :          natural := 4;
+        Npixel :        natural := 4
     );
     port (
+        ---------------- input ----------------------
         clk         : in  std_logic;
         a_rst_n     : in  std_logic;
         alpha       : in std_logic_vector(NBitAlpha-1 downto 0);
 
+        ---------------- output ---------------------
         fo : out std_logic_vector(NBitFo-1 downto 0)  
     );
-    
-    end ImageElaborationSystem;
+end ImageElaborationSystem;
+
+---------------------------------------------------------
+-- Architecture
+---------------------------------------------------------
 
 architecture rtl of ImageElaborationSystem is
-
+    
+    ---------------------------------------------------------
+    -- FoCalculator Component
+    ---------------------------------------------------------
     component FoCalculator
         generic (
-            NBitAlpha : natural := 3;  -- Default value is 3, can be configured
-            NBitPixelValue : natural := 8;   -- Default value is 8, can be configured
-            NRow : natural := 4;
-            NBitRow : natural := 2;  
-            NBitCol : natural := 2;   
-            NCol : natural := 4;
-            NBitFo : natural := 12  -- Default value is 4, can be configured
+            NBitAlpha :     natural := 3;  
+            NBitPixelValue: natural := 8;   
+            NRow :          natural := 4;
+            NBitRow :       natural := 2;  
+            NBitCol :       natural := 2;   
+            NCol :          natural := 4;
+            NBitFo :        natural := 12  
         );
         port (
+            ---------------- input ----------------------
             clk         : in  std_logic;
             a_rst_n     : in  std_logic;
             pixel       : in std_logic_vector(7 downto 0);
             alpha       : in std_logic_vector(NBitAlpha-1 downto 0);
 
+            ---------------- output ---------------------
             i_next_value : out std_logic_vector(NBitRow-1 downto 0);
             j_next_value : out std_logic_vector(NBitCol-1 downto 0);
             fo : out std_logic_vector(NBitFo-1 downto 0)  
         );
     end component;
 
+    ---------------------------------------------------------
+    -- ROM Component
+    ---------------------------------------------------------
     component ROM
         generic (
-            Npixel : natural := 4;
+            Npixel :        natural := 4;
             NBitPixelValue: natural := 8;
-            NBitRow : natural := 2;   -- Default value is 4, can be configured
-            NBitCol : natural := 2   -- Default value is 4, can be configured
+            NBitRow :       natural := 2; 
+            NBitCol :       natural := 2   
         );
         port (
             ---------------- input ----------------------
@@ -67,12 +83,16 @@ architecture rtl of ImageElaborationSystem is
         );
     end component;
 
+    ---------------------------------------------------------
+    -- Signals
+    ---------------------------------------------------------
     signal pixel_ext : std_logic_vector(7 downto 0);
     signal i_next_value_ext : std_logic_vector(NBitRow-1 downto 0);
     signal j_next_value_ext : std_logic_vector(NBitCol-1 downto 0);
 
     begin
 
+        -- Fo Calculator component
         FO_CALCULATOR: FoCalculator
         generic map (
             NBitAlpha => NBitAlpha,
@@ -93,7 +113,8 @@ architecture rtl of ImageElaborationSystem is
             j_next_value => j_next_value_ext,
             fo => fo
         );
-
+        
+        -- ROM component
         C_ROM: ROM
         generic map (
             Npixel => Npixel,
